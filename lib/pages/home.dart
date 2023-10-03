@@ -78,19 +78,7 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
         elevation: 10,
-        backgroundColor: Colors
-            .transparent, // Set the AppBar background color to transparent
-        automaticallyImplyLeading: false, // Disable the back button if needed
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(
-                  20.0), // Adjust the radius to round the corners as desired
-            ),
-            color: Colors.amber, // You can set the background color here
           ),
-        ),
-      ),
       drawer: NavigationDrawerWidget(),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,

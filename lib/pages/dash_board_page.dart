@@ -5,10 +5,11 @@ class DashBoardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
         title: Text('Dash board for now'),
         centerTitle: true,
-        backgroundColor: Colors.blue.shade600,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
