@@ -1,16 +1,22 @@
+import 'dart:async';
+
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../util/todo_tile.dart';
 import '../util/new_task_dialog.dart';
 import '../data/database.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-class HomePage extends StatefulWidget{
-  const HomePage({super.key});
+
+class TaskList extends StatefulWidget {
+  final String taskListName;
+
+  TaskList({Key? key, required this.taskListName}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _TaskListState createState() => _TaskListState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TaskListState extends State<TaskList> {
   final _mybox = Hive.box('mybox');
   ToDoDatabase db = ToDoDatabase();
 
@@ -34,7 +40,13 @@ class _HomePageState extends State<HomePage> {
   void checkBoxChanged(bool? value, int index){
     setState(() {
       db.todoList[index][1] = !db.todoList[index][1];
+      if (value == true)
+      {
+         moveTaskToBottom(index);
+      }
+
     });
+
     db.updateDatabase();
   }
   void saveNewTask()
@@ -57,6 +69,14 @@ class _HomePageState extends State<HomePage> {
       );
     });
   }
+  void moveTaskToBottom(int index)
+  {
+    setState(() {
+      final tile = db.todoList.removeAt(index);
+      db.todoList.insert(db.todoList.length , tile);
+    });
+    db.updateDatabase();
+  }
   void deleteTask(int index)
   {
     setState(() {
@@ -64,34 +84,26 @@ class _HomePageState extends State<HomePage> {
     });
     db.updateDatabase();
   }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: Colors.amber[100],
-      appBar: AppBar(
-        title: Text(
-          'TO DO',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20.0,
-            color: Colors.white
-          ),
-        ),
-        centerTitle: true,
-        elevation: 10,
-        backgroundColor: Colors.transparent, // Set the AppBar background color to transparent
-        automaticallyImplyLeading: false, // Disable the back button if needed
-        flexibleSpace: Container(
 
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20.0), // Adjust the radius to round the corners as desired
-            ),
-            color: Colors.amber, // You can set the background color here
+      backgroundColor: Colors.amber[100],
+
+      appBar: AppBar(
+        title: Text('TO DO'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              // Navigate back to the TaskDashboard
+              Navigator.pop(context);
+            },
           ),
-        ),
-      )
-      ,
+        ],
+      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
         child: Icon(Icons.add, color: Colors.white,),
@@ -104,9 +116,10 @@ class _HomePageState extends State<HomePage> {
               taskCompleted: db.todoList[index][1],
               onChanged: (value) => checkBoxChanged(value, index),
               deleteFunction: (context) => deleteTask(index),
+
           );
-        }
-        ,
+        },
+
     ),
 
     );

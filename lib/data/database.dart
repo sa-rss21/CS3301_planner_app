@@ -24,3 +24,29 @@ class ToDoDatabase
     _mybox.put("TODOLIST", todoList);
   }
 }
+
+
+class TaskDatabase
+{
+  List taskList = [];
+  //reference box
+  final _mybox = Hive.box('mybox');
+
+  //run method if first time opening app
+  void createInitialData()
+  {
+    taskList = [
+      ["Example List", false]
+    ];
+  }
+  //load the data from database
+  void loadData()
+  {
+    taskList = _mybox.get("TASKLIST");
+  }
+  //update database
+  void updateDatabase()
+  {
+    _mybox.put("TASKLIST", taskList);
+  }
+}

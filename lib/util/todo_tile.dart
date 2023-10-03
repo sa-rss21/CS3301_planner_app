@@ -11,7 +11,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
         required this.taskName,
         required this.taskCompleted,
         required this.onChanged,
-        required this.deleteFunction
+        required this.deleteFunction,
+
       });
     
       @override
@@ -33,31 +34,46 @@ import 'package:flutter_slidable/flutter_slidable.dart';
             ),
             child: Container(
               padding: EdgeInsets.all(24),
-              child: Row(
+              child: Stack(
                 children: [
-                  //checkbox
-                   Checkbox(
-                     value: taskCompleted,
-                     onChanged: onChanged,
-                     activeColor: Colors.white,
-                     checkColor: Colors.grey[600],
-                   ),
+                  Row(
+                    children: [
+                      // Checkbox
+                      Checkbox(
+                        value: taskCompleted,
+                        onChanged: onChanged,
+                        activeColor: Colors.white,
+                        checkColor: Colors.grey[600],
+                      ),
 
-                  //task name
-                  Text(
-                    taskName,
-                    style: TextStyle(
-                        decoration: taskCompleted ? TextDecoration.lineThrough : TextDecoration.none,
-                      color: Colors.white
+                      // Task name
+                      Text(
+                        taskName,
+                        style: TextStyle(
+                          decoration: taskCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Grey arrow pointing to the left
+                  Positioned(
+                    right: 0, // Anchored to the right side of the container
+                    top: 0,   // Align it to the top
+                    bottom: 0, // Align it to the bottom
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
               decoration: BoxDecoration(
-                  color: Colors.amber[400],
-                  borderRadius: BorderRadius.circular(12)
+                color: Colors.amber[400],
+                borderRadius: BorderRadius.circular(12),
               ),
-            ),
+            )
+
           ),
         );
       }
