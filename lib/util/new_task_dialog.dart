@@ -25,7 +25,9 @@ import '../util/my_button.dart';
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Add a new task",
+
                 ),
+
               ),
               //buttons save and cancel
               Row(
