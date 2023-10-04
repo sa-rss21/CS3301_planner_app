@@ -1,3 +1,4 @@
+import 'package:cs3301_planner_app/pages/dash_board_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/home.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: DashBoardPage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.amber),
     );

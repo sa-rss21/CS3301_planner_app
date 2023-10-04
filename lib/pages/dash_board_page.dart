@@ -13,14 +13,20 @@ class DashBoardPage extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: <Widget>[
-            makeDashboardItem("Budget", Icons.monetization_on_outlined),
-            makeDashboardItem("Notes", Icons.note_sharp),
-            makeDashboardItem("To Do List", Icons.list_alt)
-          ],
-        ),
+        // child: GridView.count(
+        //   crossAxisCount: 2,
+        //   children: <Widget>[
+        //     makeDashboardItem("Budget", Icons.monetization_on_outlined),
+        //     makeDashboardItem("Notes", Icons.note_sharp),
+        //     makeDashboardItem("To Do List", Icons.list_alt)
+        //   ],
+        // ),
+        child: GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (BuildContext context, int index) {
+              return Card();
+            }),
       ),
     );
   }
