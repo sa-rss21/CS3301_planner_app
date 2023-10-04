@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../pages/dash_board_page.dart';
-
+import '../pages/home.dart';
 class NavigationDrawerWidget extends StatelessWidget {
   final padding = EdgeInsets.symmetric(vertical: 10);
 
@@ -14,21 +14,23 @@ class NavigationDrawerWidget extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 300),
             buildMenuItem(
-              text: "Dashboard",
-              icon: Icons.dashboard_rounded,
+              text: "Home",
+              icon: Icons.home_rounded,
               onClicked: () => selectedItem(context, 0),
             ),
+            const SizedBox(height: 10),
+            buildMenuItem(
+              text: "Dashboard",
+              icon: Icons.dashboard_rounded,
+              onClicked: () => selectedItem(context, 1),
+            ),
+
             const SizedBox(height: 10),
             buildMenuItem(
               text: "Pinned",
               icon: Icons.priority_high_outlined,
             ),
-            const SizedBox(height: 50),
-            buildMenuItem(
-              text: "Home",
-              icon: Icons.dashboard_rounded,
-              onClicked: () => selectedItem(context, 0),
-            ),
+
             // divider
             const SizedBox(height: 350),
             Divider(color: Colors.white),
@@ -48,8 +50,10 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+      case 1:
+        Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (context) => DashBoardPage()));
-
     }
   }
 
