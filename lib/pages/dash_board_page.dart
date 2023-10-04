@@ -1,3 +1,4 @@
+import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +12,7 @@ class DashBoardPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
+      drawer: NavigationDrawerWidget(),
     );
   }
 }

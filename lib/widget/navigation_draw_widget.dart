@@ -23,7 +23,12 @@ class NavigationDrawerWidget extends StatelessWidget {
               text: "Pinned",
               icon: Icons.priority_high_outlined,
             ),
-
+            const SizedBox(height: 50),
+            buildMenuItem(
+              text: "Home",
+              icon: Icons.dashboard_rounded,
+              onClicked: () => selectedItem(context, 0),
+            ),
             // divider
             const SizedBox(height: 350),
             Divider(color: Colors.white),
@@ -43,7 +48,8 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => DashBoardPage()));
+            .pushReplacement(MaterialPageRoute(builder: (context) => DashBoardPage()));
+
     }
   }
 
