@@ -1,30 +1,23 @@
 import 'package:flutter/material.dart';
 import '../pages/dash_board_page.dart';
-import '../pages/home.dart';
+
 class NavigationDrawerWidget extends StatelessWidget {
-  final padding = EdgeInsets.symmetric(vertical: 10);
+  final padding = EdgeInsets.symmetric(horizontal: 10);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.amber.shade700,
+        color: Colors.amber.shade900,
         child: ListView(
           padding: padding,
           children: <Widget>[
             const SizedBox(height: 300),
             buildMenuItem(
-              text: "Home",
-              icon: Icons.home_rounded,
-              onClicked: () => selectedItem(context, 0),
-            ),
-            const SizedBox(height: 10),
-            buildMenuItem(
               text: "Dashboard",
               icon: Icons.dashboard_rounded,
-              onClicked: () => selectedItem(context, 1),
+              onClicked: () => selectedItem(context, 0),
             ),
-
             const SizedBox(height: 10),
             buildMenuItem(
               text: "Pinned",
@@ -50,10 +43,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
-      case 1:
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => DashBoardPage()));
+            .push(MaterialPageRoute(builder: (context) => DashBoardPage()));
     }
   }
 
