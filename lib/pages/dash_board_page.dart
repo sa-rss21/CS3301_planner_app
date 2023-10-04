@@ -25,7 +25,11 @@ class DashBoardPage extends StatelessWidget {
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (BuildContext context, int index) {
-              return Card();
+              return Card(
+                  child: Column(children: [
+                Image.asset("images/book.png", height: 40, width: 40),
+                Text("Notes")
+              ]));
             }),
       ),
     );
