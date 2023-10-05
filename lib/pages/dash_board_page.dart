@@ -1,8 +1,21 @@
+import 'package:cs3301_planner_app/pages/notes_page.dart';
+import 'package:cs3301_planner_app/pages/task_list.dart';
 import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DashBoardPage extends StatelessWidget {
+  var images = [
+    "assets/images/book.png",
+    "assets/images/shopping-cart.png",
+    "assets/images/to-do-list.png",
+  ];
+
+  var services = [
+    "Notes",
+    "Expenses",
+    "To Do List",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,52 +28,109 @@ class DashBoardPage extends StatelessWidget {
       endDrawer: NavigationDrawerWidget(),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
-        // child: GridView.count(
-        //   crossAxisCount: 2,
-        //   children: <Widget>[
-        //     makeDashboardItem("Budget", Icons.monetization_on_outlined),
-        //     makeDashboardItem("Notes", Icons.note_sharp),
-        //     makeDashboardItem("To Do List", Icons.list_alt)
-        //   ],
+        // display grids
+        // child: InkWell(
+        //   onTap: () {
+        //     Navigator.push(
+        //         context, MaterialPageRoute(builder: (context) => TaskList()));
+        //   },
+        //   child: GridView.builder(
+        //       itemCount: services.length,
+        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //           crossAxisCount: 2,
+        //           childAspectRatio: MediaQuery.of(context).size.width /
+        //               (MediaQuery.of(context).size.height / 2.0)),
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return Card(
+        //           child: Column(
+        //             children: <Widget>[
+        //               SizedBox(height: 40),
+        //               // Image(image: new AssetImage(images[index])),
+        //               Image.asset(images[index], height: 120, width: 100),
+        //               Padding(
+        //                   padding: const EdgeInsets.all(10),
+        //                   child: Text(services[index],
+        //                       style: TextStyle(
+        //                           fontSize: 24,
+        //                           height: 1.2,
+        //                           fontWeight: FontWeight.bold),
+        //                       textAlign: TextAlign.left))
+        //             ],
+        //           ),
+        //         );
+        //       }),
         // ),
-        child: GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (BuildContext context, int index) {
-              return Card();
-            }),
-      ),
-    );
-  }
-
-  // TO DO: make items in dashboard
-  Card makeDashboardItem(String title, IconData icon) {
-    return Card(
-      elevation: 1.0,
-      margin: EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(color: Colors.yellow.shade200),
-        child: InkWell(
-          onTap: () {},
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            verticalDirection: VerticalDirection.down,
-            children: <Widget>[
-              SizedBox(height: 50.0),
-              Center(
-                  child: Icon(
-                icon,
-                size: 40.0,
-              )),
-              SizedBox(height: 20.0),
-              Center(
-                child: Text(title,
-                    style: TextStyle(
-                        fontSize: 18.0, color: Colors.yellow.shade100)),
-              )
-            ],
-          ),
+        child: GridView(
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          children: [
+            // NOTES
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => NotesPage()));
+              },
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40),
+                  // Image(image: new AssetImage(images[index])),
+                  Image.asset(images[0], height: 120, width: 100),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(services[0],
+                          style: TextStyle(
+                              fontSize: 24,
+                              height: 1.2,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left))
+                ],
+              ),
+            ),
+            // EXPENSE TRACKER
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TaskList()));
+              },
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40),
+                  // Image(image: new AssetImage(images[index])),
+                  Image.asset(images[1], height: 120, width: 100),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(services[1],
+                          style: TextStyle(
+                              fontSize: 24,
+                              height: 1.2,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left))
+                ],
+              ),
+            ),
+            // TO DO LIST
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TaskList()));
+              },
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 40),
+                  // Image(image: new AssetImage(images[index])),
+                  Image.asset(images[2], height: 120, width: 100),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(services[2],
+                          style: TextStyle(
+                              fontSize: 24,
+                              height: 1.2,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.left))
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
