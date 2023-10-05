@@ -6,14 +6,14 @@ import '../data/database.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../widget/navigation_draw_widget.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TaskList extends StatefulWidget {
+  const TaskList({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TaskList> createState() => _TaskListState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TaskListState extends State<TaskList> {
   final _mybox = Hive.box('mybox');
   ToDoDatabase db = ToDoDatabase();
 
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       // drawer: NavigationDrawerWidget(),
-      endDrawer: NavigationDrawerWidget(),
+
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
         child: Icon(

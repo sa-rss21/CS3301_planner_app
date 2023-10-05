@@ -43,7 +43,7 @@ class NavigationDrawerWidget extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => DashBoardPage()));
+            .pushReplacement(MaterialPageRoute(builder: (context) => DashBoardPage()));
     }
   }
 
