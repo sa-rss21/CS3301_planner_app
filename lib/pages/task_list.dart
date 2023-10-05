@@ -76,61 +76,72 @@ class _TaskListState extends State<TaskList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.yellow[100],
-      appBar: AppBar(
-        title: Text(
-          'TO DO',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 20.0, color: Colors.white),
-        ),
+    return WillPopScope(
+      child: Scaffold(
+        backgroundColor: Colors.yellow[100],
+        appBar: AppBar(
+          // return to previous intent
+          leading: BackButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          title: Text(
+            'TO DO',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
+          ),
 
-        // menu button to open sideBar
-        actions: [
-          Builder(builder: (context) {
-            return IconButton(
-                alignment: Alignment.topLeft,
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-                icon: const Icon(Icons.menu_outlined));
-          })
-        ],
-        centerTitle: true,
-        elevation: 10,
-        backgroundColor: Colors
-            .transparent, // Set the AppBar background color to transparent
-        automaticallyImplyLeading: false, // Disable the back button if needed
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(
-                  20.0), // Adjust the radius to round the corners as desired
+          // menu button to open sideBar
+          actions: [
+            Builder(builder: (context) {
+              return IconButton(
+                  alignment: Alignment.topLeft,
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  icon: const Icon(Icons.menu_outlined));
+            })
+          ],
+          centerTitle: true,
+          elevation: 10,
+          backgroundColor: Colors
+              .transparent, // Set the AppBar background color to transparent
+          automaticallyImplyLeading: false, // Disable the back button if needed
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(
+                    20.0), // Adjust the radius to round the corners as desired
+              ),
+              color: Colors.amber, // You can set the background color here
             ),
-            color: Colors.amber, // You can set the background color here
           ),
         ),
-      ),
-      // drawer: NavigationDrawerWidget(),
+        // drawer: NavigationDrawerWidget(),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNewTask,
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          onPressed: createNewTask,
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+        body: ListView.builder(
+          itemCount: db.todoList.length,
+          itemBuilder: (context, index) {
+            return ToDoTile(
+              taskName: db.todoList[index][0],
+              taskCompleted: db.todoList[index][1],
+              onChanged: (value) => checkBoxChanged(value, index),
+              deleteFunction: (context) => deleteTask(index),
+            );
+          },
         ),
       ),
-      body: ListView.builder(
-        itemCount: db.todoList.length,
-        itemBuilder: (context, index) {
-          return ToDoTile(
-            taskName: db.todoList[index][0],
-            taskCompleted: db.todoList[index][1],
-            onChanged: (value) => checkBoxChanged(value, index),
-            deleteFunction: (context) => deleteTask(index),
-          );
-        },
-      ),
+      onWillPop: () async {
+        return false;
+      },
     );
   }
 }
