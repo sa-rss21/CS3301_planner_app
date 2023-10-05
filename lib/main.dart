@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ExpenseData(),
       builder: (context, child) =>  MaterialApp(
-        home: ExpensePage(),
+        home: DashBoardPage(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.amber),
       ),
