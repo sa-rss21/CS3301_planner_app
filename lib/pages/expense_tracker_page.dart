@@ -19,7 +19,9 @@ class ExpensePage extends StatefulWidget {
 
 class _ExpensePageState extends State<ExpensePage> {
   final newExpenseNameController = TextEditingController();
-  final newExpenseAmountController = TextEditingController();
+  final newExpenseAmountDollarController = TextEditingController();
+  final newExpenseAmountCentController = TextEditingController();
+
   //add new expense
   void addNewExpense(){
     showDialog(context: context, builder: (context) => AlertDialog(
@@ -30,11 +32,36 @@ class _ExpensePageState extends State<ExpensePage> {
           //expense name
           TextField(
             controller: newExpenseNameController,
+            decoration: InputDecoration(
+              hintText: "Name of Expense"
+            ),
           ),
           //expense amount
-          TextField(
-            controller: newExpenseAmountController,
+          Row(
+            children: [
+              //dollars
+              Expanded(
+                child: TextField(
+                  controller: newExpenseAmountDollarController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: "Dollars"
+                  ),
+                ),
+              ),
+              //cents
+              Expanded(
+                child: TextField(
+                  controller: newExpenseAmountCentController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "Cents"
+                    )
+                ),
+              ),
+            ],
           ),
+
         ],
       ),
       actions: [
@@ -50,8 +77,10 @@ class _ExpensePageState extends State<ExpensePage> {
   }
   //saving
   void save(){
+    String amount = newExpenseAmountDollarController.text + '.'
+        + newExpenseAmountCentController.text;
     ExpenseItem newExpense = ExpenseItem(name: newExpenseNameController.text,
-        amount: newExpenseAmountController.text,
+        amount: amount,
         dateTime: DateTime.now());
     //add expense
     Provider.of<ExpenseData>(context, listen: false).addNewExpense(newExpense);
@@ -65,7 +94,8 @@ class _ExpensePageState extends State<ExpensePage> {
   }
   void clearController()
   {
-    newExpenseAmountController.clear();
+    newExpenseAmountCentController.clear();
+    newExpenseAmountDollarController.clear();
     newExpenseNameController.clear();
   }
   @override
@@ -81,6 +111,10 @@ class _ExpensePageState extends State<ExpensePage> {
           children: [
             //weekly summary
             ExpenseSummary(start: value.startOfWeek()),
+
+            const SizedBox(
+              height: 20,
+            ),
             //expense list
             ListView.builder(
               shrinkWrap: true,
