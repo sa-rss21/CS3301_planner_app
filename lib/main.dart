@@ -10,10 +10,12 @@ import 'package:path_provider/path_provider.dart';
 void main() async {
   //initialize the hive memory saving
   Hive.initFlutter();
+
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDirectory.path);
   //open a box
+  await Hive.openBox("expense_database");
   var box = await Hive.openBox('mybox');
   runApp(MyApp());
 }

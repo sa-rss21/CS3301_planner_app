@@ -1,6 +1,6 @@
 
+import 'package:cs3301_planner_app/data/database.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../util/expense_item.dart';
 import '../datetime/date_time_helper.dart';
 
@@ -13,17 +13,27 @@ class ExpenseData extends ChangeNotifier{
   {
     return overallExpenseList;
   }
+  final db = ExpenseDataBase();
+  //prepare data
+  void prepareData()
+  {
+  
+    if(db.readData().isNotEmpty){
+      overallExpenseList = db.readData();
+    }
+  }
   //add new expense
   void addNewExpense(ExpenseItem newExpense)
   {
     overallExpenseList.add(newExpense);
-
+    db.saveData(overallExpenseList);
     notifyListeners();
   }
   //delete expense
   void deleteExpense(ExpenseItem ex)
   {
     overallExpenseList.remove(ex);
+    db.saveData(overallExpenseList);
     notifyListeners();
   }
   //get weekday (mon tues etc)

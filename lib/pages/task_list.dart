@@ -78,7 +78,7 @@ class _TaskListState extends State<TaskList> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        backgroundColor: Colors.yellow[100],
+        backgroundColor: Colors.grey[300],
         appBar: AppBar(
           // return to previous intent
           leading: BackButton(

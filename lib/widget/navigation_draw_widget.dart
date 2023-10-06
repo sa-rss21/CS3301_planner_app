@@ -8,7 +8,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.amber.shade900,
+        color: Colors.amber.shade600,
         child: ListView(
           padding: padding,
           children: <Widget>[
@@ -18,11 +18,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               icon: Icons.dashboard_rounded,
               onClicked: () => selectedItem(context, 0),
             ),
-            const SizedBox(height: 10),
-            buildMenuItem(
-              text: "Pinned",
-              icon: Icons.priority_high_outlined,
-            ),
+
 
             // divider
             const SizedBox(height: 350),
