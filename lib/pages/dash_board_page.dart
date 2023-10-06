@@ -1,3 +1,4 @@
+import 'package:cs3301_planner_app/pages/expense_tracker_page.dart';
 import 'package:cs3301_planner_app/pages/notes_page.dart';
 import 'package:cs3301_planner_app/pages/task_list.dart';
 import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
@@ -90,7 +91,7 @@ class DashBoardPage extends StatelessWidget {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TaskList()));
+                    MaterialPageRoute(builder: (context) => ExpensePage()));
               },
               child: Column(
                 children: <Widget>[
