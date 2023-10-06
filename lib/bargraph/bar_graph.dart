@@ -35,7 +35,7 @@ class MyBarGraph extends StatelessWidget {
     myBarData.initializeBarData();
     return BarChart(
       BarChartData(
-        maxY: 100,
+        maxY: maxY,
         minY: 0,
         titlesData: FlTitlesData(
           show: true,

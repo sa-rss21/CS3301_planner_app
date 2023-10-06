@@ -22,6 +22,13 @@ class _ExpensePageState extends State<ExpensePage> {
   final newExpenseAmountDollarController = TextEditingController();
   final newExpenseAmountCentController = TextEditingController();
 
+  @override
+  void initState(){
+    super.initState();
+
+    Provider.of<ExpenseData>(context, listen: false).prepareData();
+
+  }
   //add new expense
   void addNewExpense() {
     showDialog(
@@ -72,20 +79,30 @@ class _ExpensePageState extends State<ExpensePage> {
               ],
             ));
   }
-
+  void delete(ExpenseItem expense)
+  {
+    Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);
+  }
   //saving
   void save() {
-    String amount = newExpenseAmountDollarController.text +
-        '.' +
-        newExpenseAmountCentController.text;
-    ExpenseItem newExpense = ExpenseItem(
-        name: newExpenseNameController.text,
-        amount: amount,
-        dateTime: DateTime.now());
-    //add expense
-    Provider.of<ExpenseData>(context, listen: false).addNewExpense(newExpense);
-    Navigator.pop(context);
-    clearController();
+      if (newExpenseAmountDollarController.text.isNotEmpty
+          && newExpenseAmountCentController.text.isNotEmpty
+          && newExpenseNameController.text.isNotEmpty)
+      {
+        String amount = newExpenseAmountDollarController.text +
+            '.' +
+            newExpenseAmountCentController.text;
+
+        ExpenseItem newExpense = ExpenseItem(
+            name: newExpenseNameController.text,
+            amount: amount,
+            dateTime: DateTime.now());
+        //add expense
+        Provider.of<ExpenseData>(context, listen: false).addNewExpense(
+            newExpense);
+        Navigator.pop(context);
+        clearController();
+      }
   }
 
   //cancel
@@ -105,6 +122,7 @@ class _ExpensePageState extends State<ExpensePage> {
     return Consumer<ExpenseData>(
       builder: (context, value, child) => WillPopScope(
         child: Scaffold(
+          endDrawer: NavigationDrawerWidget(),
           appBar: AppBar(
             leading: BackButton(
               onPressed: () {
@@ -138,7 +156,10 @@ class _ExpensePageState extends State<ExpensePage> {
                   itemBuilder: (context, index) => ExpenseTile(
                       name: value.getAllExpenseList()[index].name,
                       amount: value.getAllExpenseList()[index].amount,
-                      date: value.getAllExpenseList()[index].dateTime)),
+                      date: value.getAllExpenseList()[index].dateTime,
+                    onPressed: (p0) => delete(value.getAllExpenseList()[index]),
+                  )
+              ),
             ],
           ),
         ),

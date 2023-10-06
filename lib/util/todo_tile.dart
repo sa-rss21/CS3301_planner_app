@@ -33,25 +33,37 @@ import 'package:flutter_slidable/flutter_slidable.dart';
             ),
             child: Container(
               padding: EdgeInsets.all(24),
-              child: Row(
-                children: [
-                  //checkbox
-                   Checkbox(
-                     value: taskCompleted,
-                     onChanged: onChanged,
-                     activeColor: Colors.white,
-                     checkColor: Colors.grey[600],
-                   ),
+              child: Stack(
+                children: [Row(
+                  children: [
+                    //checkbox
+                     Checkbox(
+                       value: taskCompleted,
+                       onChanged: onChanged,
+                       activeColor: Colors.white,
+                       checkColor: Colors.grey[600],
+                     ),
 
-                  //task name
-                  Text(
-                    taskName,
-                    style: TextStyle(
-                        decoration: taskCompleted ? TextDecoration.lineThrough : TextDecoration.none,
-                      color: Colors.white
+                    //task name
+                    Text(
+                      taskName,
+                      style: TextStyle(
+                          decoration: taskCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                        color: Colors.white
+                      ),
+                    ),
+                  ],
+                ),
+                  Positioned(
+                    right: 0, // Anchored to the right side of the container
+                    top: 0,   // Align it to the top
+                    bottom: 0, // Align it to the bottom
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
                     ),
                   ),
-                ],
+              ]
               ),
               decoration: BoxDecoration(
                   color: Colors.amber[400],

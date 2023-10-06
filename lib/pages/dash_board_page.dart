@@ -20,15 +20,17 @@ class DashBoardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber.shade100,
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text('Dash board for now'),
+        automaticallyImplyLeading: false,
+        title: Text('Resource Dash Board'),
         centerTitle: true,
         backgroundColor: Colors.amber.shade400,
       ),
       endDrawer: NavigationDrawerWidget(),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 2.0),
+
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
         // display grids
         // child: InkWell(
         //   onTap: () {
@@ -62,73 +64,96 @@ class DashBoardPage extends StatelessWidget {
         //       }),
         // ),
         child: GridView(
+
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
+                  crossAxisSpacing: 20, mainAxisSpacing: 20),
           children: [
             // NOTES
-            InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NotesPage()));
-              },
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 40),
-                  // Image(image: new AssetImage(images[index])),
-                  Image.asset(images[0], height: 120, width: 100),
-                  Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(services[0],
-                          style: TextStyle(
-                              fontSize: 24,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.left))
-                ],
+            Container(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NotesPage()));
+                },
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    // Image(image: new AssetImage(images[index])),
+                    Image.asset(images[0], height: 120, width: 100),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(services[0],
+                            style: TextStyle(
+                                fontSize: 24,
+                                height: 1.2,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.left))
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.amber[300],
+                  borderRadius: BorderRadius.circular(12)
               ),
             ),
             // EXPENSE TRACKER
-            InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ExpensePage()));
-              },
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 40),
-                  // Image(image: new AssetImage(images[index])),
-                  Image.asset(images[1], height: 120, width: 100),
-                  Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(services[1],
-                          style: TextStyle(
-                              fontSize: 24,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.left))
-                ],
+            Container(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ExpensePage()));
+                },
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    // Image(image: new AssetImage(images[index])),
+                    Image.asset(images[1], height: 120, width: 100),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(services[1],
+                            style: TextStyle(
+                                fontSize: 24,
+                                height: 1.2,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.left))
+                  ],
+                ),
               ),
+              decoration: BoxDecoration(
+                  color: Colors.amber[300],
+                  borderRadius: BorderRadius.circular(12),
+              ),
+
             ),
             // TO DO LIST
-            InkWell(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TaskList()));
-              },
-              child: Column(
-                children: <Widget>[
-                  SizedBox(height: 40),
-                  // Image(image: new AssetImage(images[index])),
-                  Image.asset(images[2], height: 120, width: 100),
-                  Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(services[2],
-                          style: TextStyle(
-                              fontSize: 24,
-                              height: 1.2,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.left))
-                ],
+            Container(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TaskList()));
+                },
+                child: Column(
+                  children: <Widget>[
+
+                    SizedBox(height: 40),
+                    // Image(image: new AssetImage(images[index])),
+                    Image.asset(images[2], height: 120, width: 100),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(services[2],
+                            style: TextStyle(
+                                fontSize: 24,
+                                height: 1.2,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.left))
+                  ],
+
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.amber[300],
+                  borderRadius: BorderRadius.circular(12)
               ),
             )
           ],
