@@ -1,6 +1,8 @@
 import 'package:cs3301_planner_app/pages/dash_board_page.dart';
 import 'package:cs3301_planner_app/util/mood_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../data/mood_data.dart';
 import '../util/new_task_dialog.dart';
 import '../data/database.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,8 +17,19 @@ class MoodPage extends StatefulWidget {
 
 class _MoodPageState extends State<MoodPage> {
     String selectedMood = '';
-    List<MoodItem> moodEntries = [];
+
     TextEditingController moodReasonController = TextEditingController();
+    final _mybox = Hive.box('mood_database');
+    MoodData moodData = MoodData();
+    List<MoodItem> moodEntries = [];
+
+    @override
+    void initState() {
+    // TODO: implement initState
+      moodData.prepareData();
+      moodEntries = moodData.overallMoodList;
+    super.initState();
+  }
 
   void selectMood(String mood) {
     setState(() {
@@ -31,17 +44,18 @@ class _MoodPageState extends State<MoodPage> {
         String moodReason = moodReasonController.text; // Get mood reason from the text field
         String formattedTime = "${now.hour}:${now.minute}:${now.second}";
 
-        // Create a new MoodEntry and add it to the list
-        moodEntries.add(MoodItem(
-            mood: mood, 
+        moodData.addNew(MoodItem(
+            mood: mood,
             reason: moodReason,
             timestamp: formattedTime));
+        moodEntries = moodData.overallMoodList;
 
         if (moodEntries.isNotEmpty) {
         selectedMood = '';
       }
       moodReasonController.clear();
       });
+
     }
   }
 
