@@ -17,6 +17,7 @@ void main() async {
   //open a box
   await Hive.openBox("expense_database");
   var box = await Hive.openBox('mybox');
+  await Hive.openBox("mood_database");
   runApp(MyApp());
 }
 

@@ -1,4 +1,5 @@
 import '../util/expense_item.dart';
+import '../util/mood_item.dart';
 import 'package:hive/hive.dart';
 
 class ToDoDatabase
@@ -66,5 +67,51 @@ class ExpenseDataBase
         allExpenses.add(expense);
       }
     return allExpenses;
+  }
+}
+class MoodDatabase {
+  final _mybox = Hive.box('mood_database');
+
+  // Save mood entries to the database
+  void saveData(List<MoodItem> moodEntries) {
+    List<List<dynamic>> allMoodEntriesFormatted = [];
+
+    for (var entry in moodEntries) {
+      List<dynamic> moodEntryFormatted = [
+        entry.mood,
+        entry.reason,
+        entry.timestamp,
+      ];
+      allMoodEntriesFormatted.add(moodEntryFormatted);
+    }
+
+    _mybox.put('ALL_MOOD_ENTRIES', allMoodEntriesFormatted);
+  }
+
+  // Clear all mood data in the database
+  void clear() {
+    _mybox.clear();
+  }
+
+  // Read mood data from the database and convert it to MoodItem objects
+  List<MoodItem> readData() {
+    List saved = _mybox.get('ALL_MOOD_ENTRIES') ?? [];
+    List<MoodItem> allMoodEntries = [];
+
+    for (int i = 0; i < saved.length; i++) {
+      String mood = saved[i][0];
+      String reason = saved[i][1];
+      String timestamp = saved[i][2];
+
+      MoodItem moodItem = MoodItem(
+        mood: mood,
+        reason: reason,
+        timestamp: timestamp,
+      );
+
+      allMoodEntries.add(moodItem);
+    }
+
+    return allMoodEntries;
   }
 }
