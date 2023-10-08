@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../pages/dash_board_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
@@ -12,13 +13,18 @@ class NavigationDrawerWidget extends StatelessWidget {
         child: ListView(
           padding: padding,
           children: <Widget>[
-            const SizedBox(height: 300),
+            const SizedBox(height: 100),
+            UserAccountsDrawerHeader(
+              accountName: Text("Swandovia"),
+              accountEmail: Text("Sswhh@gmail.com"),
+              currentAccountPicture:
+                  CircleAvatar(child: ClipOval(), backgroundColor: Colors.blue),
+            ),
             buildMenuItem(
               text: "Dashboard",
               icon: Icons.dashboard_rounded,
               onClicked: () => selectedItem(context, 0),
             ),
-
 
             // divider
             const SizedBox(height: 350),
@@ -38,8 +44,8 @@ class NavigationDrawerWidget extends StatelessWidget {
   void selectedItem(BuildContext context, int index) {
     switch (index) {
       case 0:
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => DashBoardPage()));
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => DashBoardPage()));
     }
   }
 

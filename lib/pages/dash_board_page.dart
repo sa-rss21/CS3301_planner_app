@@ -3,7 +3,6 @@ import 'package:cs3301_planner_app/pages/notes_page.dart';
 import 'package:cs3301_planner_app/pages/task_list.dart';
 import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class DashBoardPage extends StatelessWidget {
   var images = [
@@ -29,7 +28,6 @@ class DashBoardPage extends StatelessWidget {
       ),
       endDrawer: NavigationDrawerWidget(),
       body: Container(
-
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 5.0),
         // display grids
         // child: InkWell(
@@ -64,10 +62,8 @@ class DashBoardPage extends StatelessWidget {
         //       }),
         // ),
         child: GridView(
-
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                  crossAxisSpacing: 20, mainAxisSpacing: 20),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing: 20),
           children: [
             // NOTES
             Container(
@@ -80,7 +76,7 @@ class DashBoardPage extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 40),
                     // Image(image: new AssetImage(images[index])),
-                    Image.asset(images[0], height: 120, width: 100),
+                    Image.asset(images[0], height: 100, width: 100),
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(services[0],
@@ -94,8 +90,7 @@ class DashBoardPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                   color: Colors.amber[300],
-                  borderRadius: BorderRadius.circular(12)
-              ),
+                  borderRadius: BorderRadius.circular(12)),
             ),
             // EXPENSE TRACKER
             Container(
@@ -108,7 +103,7 @@ class DashBoardPage extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 40),
                     // Image(image: new AssetImage(images[index])),
-                    Image.asset(images[1], height: 120, width: 100),
+                    Image.asset(images[1], height: 100, width: 100),
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(services[1],
@@ -121,10 +116,9 @@ class DashBoardPage extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                  color: Colors.amber[300],
-                  borderRadius: BorderRadius.circular(12),
+                color: Colors.amber[300],
+                borderRadius: BorderRadius.circular(12),
               ),
-
             ),
             // TO DO LIST
             Container(
@@ -135,10 +129,9 @@ class DashBoardPage extends StatelessWidget {
                 },
                 child: Column(
                   children: <Widget>[
-
                     SizedBox(height: 40),
                     // Image(image: new AssetImage(images[index])),
-                    Image.asset(images[2], height: 120, width: 100),
+                    Image.asset(images[2], height: 100, width: 100),
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(services[2],
@@ -148,13 +141,11 @@ class DashBoardPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.left))
                   ],
-
                 ),
               ),
               decoration: BoxDecoration(
                   color: Colors.amber[300],
-                  borderRadius: BorderRadius.circular(12)
-              ),
+                  borderRadius: BorderRadius.circular(12)),
             )
           ],
         ),
