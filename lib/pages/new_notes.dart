@@ -1,8 +1,12 @@
+import 'package:cs3301_planner_app/data/notes_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class NewNotesPage extends StatefulWidget {
-  const NewNotesPage({super.key});
+  final Notes? note;
+  const NewNotesPage({
+    super.key,
+    this.note,
+  });
 
   State<NewNotesPage> createState() => NewNoteState();
 }
@@ -10,6 +14,17 @@ class NewNotesPage extends StatefulWidget {
 class NewNoteState extends State<NewNotesPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if (widget.note != null) {
+      titleController = TextEditingController(text: widget.note!.title);
+      contentController = TextEditingController(text: widget.note!.content);
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +51,10 @@ class NewNoteState extends State<NewNotesPage> {
                   children: [
                     TextField(
                       controller: titleController,
-                      style: TextStyle(color: Colors.grey, fontSize: 30),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontStyle: FontStyle.normal),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Text',
@@ -45,7 +63,7 @@ class NewNoteState extends State<NewNotesPage> {
                     ),
                     TextField(
                       controller: contentController,
-                      style: TextStyle(color: Colors.grey, fontSize: 30),
+                      style: TextStyle(color: Colors.black, fontSize: 30),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Type here',
@@ -58,12 +76,17 @@ class NewNoteState extends State<NewNotesPage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          Navigator.pop(context, [
-            titleController.text,
-            contentController.text,
-          ]);
-        }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pop(context, [
+              titleController.text,
+              contentController.text,
+            ]);
+          },
+          elevation: 10,
+          backgroundColor: Colors.purple.shade50,
+          child: Icon(Icons.save),
+        ),
       ),
       onWillPop: () async {
         return false;
