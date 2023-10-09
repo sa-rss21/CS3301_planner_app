@@ -163,7 +163,7 @@ class DashBoardPage extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(height: 40),
                     // Image(image: new AssetImage(images[index])),
-                    Image.asset(images[3], height: 120, width: 100),
+                    Image.asset(images[3], height: 100, width: 100),
                     Padding(
                         padding: const EdgeInsets.all(10),
                         child: Text(services[3],
