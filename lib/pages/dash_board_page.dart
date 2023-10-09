@@ -1,5 +1,6 @@
 import 'package:cs3301_planner_app/pages/expense_tracker_page.dart';
 import 'package:cs3301_planner_app/pages/notes_page.dart';
+import 'package:cs3301_planner_app/pages/mood_tracker_page.dart';
 import 'package:cs3301_planner_app/pages/task_list.dart';
 import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +10,14 @@ class DashBoardPage extends StatelessWidget {
     "assets/images/book.png",
     "assets/images/shopping-cart.png",
     "assets/images/to-do-list.png",
+    "assets/images/emotion.png"
   ];
 
   var services = [
     "Notes",
     "Expenses",
     "To Do List",
+    "Mood"
   ];
   @override
   Widget build(BuildContext context) {
@@ -145,7 +148,38 @@ class DashBoardPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                   color: Colors.amber[300],
-                  borderRadius: BorderRadius.circular(12)),
+                
+                  borderRadius: BorderRadius.circular(12)
+              ),
+            ),
+            // MOOD TRACKER
+            Container(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MoodPage()));
+                },
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40),
+                    // Image(image: new AssetImage(images[index])),
+                    Image.asset(images[3], height: 120, width: 100),
+                    Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(services[3],
+                            style: TextStyle(
+                                fontSize: 24,
+                                height: 1.2,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.left))
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.amber[300],
+                  borderRadius: BorderRadius.circular(12),
+              ),
+
             )
           ],
         ),
