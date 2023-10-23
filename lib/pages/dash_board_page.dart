@@ -1,6 +1,7 @@
 import 'package:cs3301_planner_app/pages/expense_tracker_page.dart';
 import 'package:cs3301_planner_app/pages/notes_page.dart';
 import 'package:cs3301_planner_app/pages/mood_tracker_page.dart';
+import 'package:cs3301_planner_app/pages/calculator_page.dart';
 import 'package:cs3301_planner_app/pages/task_list.dart';
 import 'package:cs3301_planner_app/widget/navigation_draw_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,16 @@ class DashBoardPage extends StatelessWidget {
     "assets/images/book.png",
     "assets/images/shopping-cart.png",
     "assets/images/to-do-list.png",
-    "assets/images/emotion.png"
+    "assets/images/emotion.png",
+    "assets/images/calculator.png"
   ];
 
   var services = [
     "Notes",
     "Expenses",
     "To Do List",
-    "Mood"
+    "Mood",
+    "Calculator"
   ];
   @override
   Widget build(BuildContext context) {
@@ -148,7 +151,7 @@ class DashBoardPage extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                   color: Colors.amber[300],
-                
+
                   borderRadius: BorderRadius.circular(12)
               ),
             ),
@@ -176,10 +179,42 @@ class DashBoardPage extends StatelessWidget {
                 ),
               ),
               decoration: BoxDecoration(
-                  color: Colors.amber[300],
-                  borderRadius: BorderRadius.circular(12),
+                color: Colors.amber[300],
+                borderRadius: BorderRadius.circular(12),
               ),
 
+            ),
+            //Calculator
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.amber[300],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CalculatorPage()));
+                },
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Image.asset(images[4], fit: BoxFit.contain, height: 120, width: 90),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        services[4],
+                        style: TextStyle(
+                            fontSize: 22,
+                            height: 1.1,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
         ),
