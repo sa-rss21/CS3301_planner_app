@@ -1,7 +1,6 @@
 import 'package:cs3301_planner_app/pages/dash_board_page.dart';
 import 'package:cs3301_planner_app/util/mood_item.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../data/mood_data.dart';
 import '../util/new_task_dialog.dart';
 import '../data/database.dart';
@@ -54,7 +53,7 @@ class _MoodPageState extends State<MoodPage> {
         DateTime now = DateTime.now();
         // get mood reason from the text field
         String moodReason = moodReasonController.text;
-        String formattedTime = "${now.hour}:${now.minute}:${now.second}";
+        String formattedTime = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} ${now.day}/${now.month}/${now.year}";
 
         // create new MoodItem and add it to list
         moodData.addNew(MoodItem(

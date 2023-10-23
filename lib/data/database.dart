@@ -71,10 +71,10 @@ class ExpenseDataBase
 }
 class MoodDatabase {
   final _mybox = Hive.box('mood_database');
+  List<List<dynamic>> allMoodEntriesFormatted = [];
 
   // Save mood entries to the database
   void saveData(List<MoodItem> moodEntries) {
-    List<List<dynamic>> allMoodEntriesFormatted = [];
 
     for (var entry in moodEntries) {
       List<dynamic> moodEntryFormatted = [
@@ -91,6 +91,11 @@ class MoodDatabase {
   // Clear all mood data in the database
   void clear() {
     _mybox.clear();
+  }
+
+  void updateDatabase()
+  {
+    _mybox.put("ALL_MOOD_ENTRIES", allMoodEntriesFormatted);
   }
 
   // Read mood data from the database and convert it to MoodItem objects
